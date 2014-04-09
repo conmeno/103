@@ -35,13 +35,15 @@ if(stringFromFileAtURL==nil)
     NSArray *allLines = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
     
     NSString *temp=@"";
-    for (int i=0; i<2;i++) {
-        temp =[temp ] [allLines objectAtIndex:2];
+    for (int i=0; i<3;i++)
+    {
+        NSLog([allLines objectAtIndex:i]);
+        temp =[temp stringByAppendingString:[allLines objectAtIndex:i]];//[allLines objectAtIndex:2];
     }
-    NSString *thirdLine = [allLines objectAtIndex:2];
+    //NSString *thirdLine = [allLines objectAtIndex:2];
 
     
-    lable1.text=thirdLine;
+    lable1.text=temp;
     
 
 }
