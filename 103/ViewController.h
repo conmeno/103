@@ -10,5 +10,11 @@
 
 @interface ViewController : UIViewController
 @property (nonatomic,retain) IBOutlet UILabel *lable1;
+@property (nonatomic,retain) IBOutlet UITableView *tableView;
+@property (nonatomic) NSArray *timeZoneNames;
+@property (nonatomic,retain) IBOutlet UITableViewCell *tablecell1;
 -(IBAction)buttonclick:(id)sender;
+
+
+
 @end
