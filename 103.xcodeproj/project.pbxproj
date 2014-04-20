@@ -32,6 +32,7 @@
 		BF9E27EC18F530490060A288 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9E27CB18F530480060A288 /* UIKit.framework */; };
 		BF9E27F418F530490060A288 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF9E27F218F530490060A288 /* InfoPlist.strings */; };
 		BF9E27F618F530490060A288 /* _03Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9E27F518F530490060A288 /* _03Tests.m */; };
+		BFE164DD1904235D00974EFF /* ss.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE164DC1904235D00974EFF /* ss.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		BF9E27F118F530490060A288 /* 103Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "103Tests-Info.plist"; sourceTree = "<group>"; };
 		BF9E27F318F530490060A288 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BF9E27F518F530490060A288 /* _03Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _03Tests.m; sourceTree = "<group>"; };
+		BFE164DC1904235D00974EFF /* ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ss.png; path = ../../Downloads/ss.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		BF99DCC818F93C3200908E6D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BFE164DC1904235D00974EFF /* ss.png */,
 				BF99DCD218F966DF00908E6D /* 3.jpeg */,
 				BF99DCD318F966DF00908E6D /* 2.jpeg */,
 				BF99DCD018F95F0300908E6D /* x.jpg */,
@@ -293,6 +296,7 @@
 				BF9E27E318F530490060A288 /* Images.xcassets in Resources */,
 				BF9E27DB18F530480060A288 /* Main_iPhone.storyboard in Resources */,
 				BF99DCD118F95F0300908E6D /* x.jpg in Resources */,
+				BFE164DD1904235D00974EFF /* ss.png in Resources */,
 				BF99DCD518F966DF00908E6D /* 2.jpeg in Resources */,
 				BF99DCD418F966DF00908E6D /* 3.jpeg in Resources */,
 				BF99DCCA18F93C5C00908E6D /* 1.jpg in Resources */,

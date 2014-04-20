@@ -9,18 +9,29 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
-
+ 
 @end
 
 @implementation DetailViewController
 @synthesize img1;
 @synthesize MainURL;
+//NSString *TempURL;
 int temp=0;
+@synthesize CurrentIndex;
+@synthesize allLines;
+-(id)init {
+    if ( self = [super init] ) {
+        
+    }
+    return self;
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+  
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -28,25 +39,8 @@ int temp=0;
 {
     
     NSString *path=@"";
-    //    if(temp==0)
-    //    {
-    //
-    //        //img1.image=[UIImage imageNamed:@"http://itmeshop.com/img/1.jpg"];
-    //
-    //        path=@"http://itmeshop.com/img/1.jpg";
-    //        temp=1;
-    //    }
-    //    else{
-    //    //img1.image=[UIImage imageNamed:@"http://itmeshop.com/img/2.jpg"];
-    //        path=@"http://itmeshop.com/img/2.jpg";
-    //        temp=0;
-    //    }
-    temp++;
-    
-    //NSURL *url = [NSURL URLWithString:path];
-    //NSData *data = [NSData dataWithContentsOfURL:url];
-    //UIImage *img2= [[UIImage alloc] initWithData:data cache:NO];
-    //img1.image=[img2.images objectAtIndex:0];
+       temp++;
+ 
     path=@"http://itmeshop.com/img/";
     path=[path stringByAppendingString:[NSString stringWithFormat:@"%d",temp]];
     path=[path stringByAppendingString:@".jpg"];
@@ -62,20 +56,50 @@ int temp=0;
 }
 - (IBAction)nextSwipe:(UISwipeGestureRecognizer *)recognizer{
     
-    if (recognizer.direction== UISwipeGestureRecognizerDirectionLeft) {
-        NSLog(@"left");
-    } else {
-         [self NextImage];
-         NSLog(@"right %d",recognizer.numberOfTouches);
-    }
-   
+    if(CurrentIndex<[allLines count])
+        CurrentIndex++;
+    [self LoadImageFromURL:[allLines objectAtIndex:CurrentIndex]];
+    
 
+}
+- (IBAction)previousSwipe:(UISwipeGestureRecognizer *)recognizer{
+    
+    if(CurrentIndex>0)
+        CurrentIndex--;
+    [self LoadImageFromURL:[allLines objectAtIndex:CurrentIndex]];
+    
+    
+}
+-(void)loadData
+{
+    NSString *temp=[MainURL stringByReplacingOccurrencesOfString:@"\r"
+                                                      withString:@""];
+    NSURL *URL = [NSURL URLWithString:temp];
+    NSError *error;
+    NSString *stringFromFileAtURL = [[NSString alloc]
+                                     initWithContentsOfURL:URL
+                                     encoding:NSUTF8StringEncoding
+                                     error:&error];
+    allLines = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
+}
+-(void)LoadImageFromURL:(NSString *)path
+{
+    path=[path stringByReplacingOccurrencesOfString:@"\r"
+                                                      withString:@""];
+    NSString *temp=[MainURL stringByReplacingOccurrencesOfString:@".txt"
+                                        withString:@"/"];
+    path=[temp stringByAppendingString:path];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]];
+    img1.image=image;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    img1.image=[UIImage imageNamed:@"1.jpg"];
-    // Do any additional setup after loading the view from its nib.
+    //MainURL=[MainURL stringByReplacingOccurrencesOfString:@"\r"
+    //                                           withString:@""];
+    //[self loadData];
+    [self LoadImageFromURL:[allLines objectAtIndex:CurrentIndex]];
+        // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning

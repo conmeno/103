@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "DetailViewController.h"//;
-#import "FGalleryViewController.h";
+//#import "FGalleryViewController.h";
 @interface ViewController ()
 
 @end
@@ -19,7 +19,7 @@
 @synthesize tablecell1;
 
 NSArray *allLines;
-FGalleryViewController *networkGallery;
+//FGalleryViewController *networkGallery;
 //NSArray *networkImages;
 NSArray *networkCaptions;
 
@@ -34,8 +34,6 @@ NSArray *networkCaptions;
     {
          temp =[temp stringByAppendingString:[allLines objectAtIndex:i]];//[allLines objectAtIndex:2];
     }
-    //NSString *thirdLine = [allLines objectAtIndex:2];
-
     
     lable1.text=temp;
     DetailViewController    *detail=[[DetailViewController alloc] init];
@@ -52,61 +50,56 @@ NSArray *networkCaptions;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	static NSString *MyIdentifier = @"MyIdentifier";
-    NSLog(@"abc_");
-	/*
-     Retrieve a cell with the given identifier from the table view.
-     The cell is defined in the main storyboard: its identifier is MyIdentifier, and  its selection style is set to None.
-     */
-	UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:MyIdentifier];
+	static NSString *MyIdentifier = @"MyIdentifier"; 	UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:MyIdentifier];
     
 	// Set up the cell.
-	NSString *timeZoneName = [allLines objectAtIndex:indexPath.row];
-	cell.textLabel.text = timeZoneName;
-    cell.imageView.image= [UIImage imageNamed:@"1.jpg"];
+   
+	NSString *rowValue = [allLines objectAtIndex:indexPath.row];
+    NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
+	cell.textLabel.text = [arrayTitle objectAtIndex:1];;
+    cell.imageView.image= [UIImage imageNamed:@"ss.png"];
 	return cell;
 }
 - (void)tableView:(UITableView *)tableView1 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+      [self loadData];
+    NSString *MainURL=@"http://itmeshop.com/truyen/truyena/";
+    NSString *rowValue = [allLines objectAtIndex:indexPath.row];
+    NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
+    NSString *FullURL = [MainURL stringByAppendingString: [arrayTitle objectAtIndex:0]];
+
     DetailViewController    *detail=[[DetailViewController alloc] init];
-    detail.MainURL=[allLines objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:detail animated:YES];
-    
-    
-    NSURL *URL = [NSURL URLWithString:@"http://itmeshop.com/img/test.txt"];
+    detail.MainURL=[FullURL stringByReplacingOccurrencesOfString:@"\r"
+                                                               withString:@""];
+    //load array of images for detail
+    NSURL *URL = [NSURL URLWithString:detail.MainURL];
     NSError *error;
     NSString *stringFromFileAtURL = [[NSString alloc]
                                      initWithContentsOfURL:URL
                                      encoding:NSUTF8StringEncoding
                                      error:&error];
-    allLines = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
-    
-    
-    
-    //networkImages =allLines;// [[NSArray alloc] initWithObjects:@"http://farm6.static.flickr.com/5042/5323996646_9c11e1b2f6_b.jpg", @"http://farm6.static.flickr.com/5007/5311573633_3cae940638.jpg",nil];
-   // networkCaptions = [[NSArray alloc] initWithObjects:@"Happy New Year!",@"Frosty Web",@"3",@"34",@"35",@"36",@"3",@"3",@"38",@"9",nil];
-
-    
-    
-    
-   // networkGallery = [[FGalleryViewController alloc] initWithPhotoSource:self];
-   // [self.navigationController pushViewController:networkGallery animated:YES];
-  //  [networkGallery release];
-    
+    NSArray *allLines2 = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
+    detail.allLines=allLines2;
+    detail.CurrentIndex=0;
+    [self.navigationController pushViewController:detail animated:YES];
   
 }
-
-- (void)viewDidLoad
+-(void)loadData
 {
-    [super viewDidLoad];
-    NSURL *URL = [NSURL URLWithString:@"http://itmeshop.com/img/test.txt"];
+    NSString *MainURL=@"http://itmeshop.com/truyen/truyena/";
+    NSURL *URL = [NSURL URLWithString:[MainURL stringByAppendingString:@"episodes.txt" ]];
     NSError *error;
     NSString *stringFromFileAtURL = [[NSString alloc]
                                      initWithContentsOfURL:URL
                                      encoding:NSUTF8StringEncoding
                                      error:&error];
     allLines = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
+}
+- (void)viewDidLoad
+{
+     
+    [super viewDidLoad];
+    [self loadData];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -116,54 +109,5 @@ NSArray *networkCaptions;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark - FGalleryViewControllerDelegate Methods
-
-
-- (int)numberOfPhotosForPhotoGallery:(FGalleryViewController *)gallery
-{
-    return 10;
-    int num;
-    
-        num = [allLines count];
-   
-	return num;
-}
-
-
-- (FGalleryPhotoSourceType)photoGallery:(FGalleryViewController *)gallery sourceTypeForPhotoAtIndex:(NSUInteger)index
-{
-	 
-	  return FGalleryPhotoSourceTypeNetwork;
-}
-
-
-- (NSString*)photoGallery:(FGalleryViewController *)gallery captionForPhotoAtIndex:(NSUInteger)index
-{
-    NSString *caption;
-    
-        caption = [networkCaptions objectAtIndex:index];
-    
-	return caption;
-}
-
-
-//- (NSString*)photoGallery:(FGalleryViewController*)gallery filePathForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index {
- //   return [localImages objectAtIndex:index];
-//}
-
-- (NSString*)photoGallery:(FGalleryViewController *)gallery urlForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index {
-    return [allLines objectAtIndex:index];
-}
-
-- (void)handleTrashButtonTouch:(id)sender {
-    // here we could remove images from our local array storage and tell the gallery to remove that image
-    // ex:
-    //[localGallery removeImageAtIndex:[localGallery currentIndex]];
-}
-
-
-- (void)handleEditCaptionButtonTouch:(id)sender {
-    // here we could implement some code to change the caption for a stored image
-}
-
+ 
 @end
