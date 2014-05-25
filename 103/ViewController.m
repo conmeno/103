@@ -10,7 +10,7 @@
 #import "DetailViewController.h"//;
 //#import "FGalleryViewController.h";
 @interface ViewController ()
-
+@property (nonatomic) NSArray *allLines;
 @end
 
 @implementation ViewController
@@ -18,7 +18,7 @@
 @synthesize tableView;
 @synthesize tablecell1;
 
-NSArray *allLines;
+
 //FGalleryViewController *networkGallery;
 //NSArray *networkImages;
 NSArray *networkCaptions;
@@ -32,7 +32,7 @@ NSArray *networkCaptions;
     NSString *temp=@"";
     for (int i=0; i<3;i++)
     {
-         temp =[temp stringByAppendingString:[allLines objectAtIndex:i]];//[allLines objectAtIndex:2];
+         temp =[temp stringByAppendingString:[self.allLines objectAtIndex:i]];//[allLines objectAtIndex:2];
     }
     
     lable1.text=temp;
@@ -44,7 +44,7 @@ NSArray *networkCaptions;
 
 - (NSInteger)tableView:(UITableView *)tableView1 numberOfRowsInSection:(NSInteger)section {
 	// Return the number of time zone names.
-	return [allLines count];
+	return [self.allLines count];
 }
 
 
@@ -53,8 +53,8 @@ NSArray *networkCaptions;
 	static NSString *MyIdentifier = @"MyIdentifier"; 	UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:MyIdentifier];
     
 	// Set up the cell.
-   
-	NSString *rowValue = [allLines objectAtIndex:indexPath.row];
+   //[self loadData];
+	NSString *rowValue = [self.allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
 	cell.textLabel.text = [arrayTitle objectAtIndex:1];;
     //cell.imageView.image= [UIImage imageNamed:@"ss.png"];
@@ -65,7 +65,7 @@ NSArray *networkCaptions;
 {
       [self loadData];
     NSString *MainURL=@"http://fataco.com/truyen/truyena/";
-    NSString *rowValue = [allLines objectAtIndex:indexPath.row];
+    NSString *rowValue = [self.allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
     NSString *FullURL = [MainURL stringByAppendingString: [arrayTitle objectAtIndex:0]];
 
@@ -94,7 +94,7 @@ NSArray *networkCaptions;
                                      initWithContentsOfURL:URL
                                      encoding:NSUTF8StringEncoding
                                      error:&error];
-    allLines = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
+    self.allLines = [stringFromFileAtURL componentsSeparatedByString: @"\n"];
 }
 - (void)viewDidLoad
 {
