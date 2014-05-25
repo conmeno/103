@@ -57,13 +57,14 @@ NSArray *networkCaptions;
 	NSString *rowValue = [allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
 	cell.textLabel.text = [arrayTitle objectAtIndex:1];;
-    cell.imageView.image= [UIImage imageNamed:@"ss.png"];
-	return cell;
+    //cell.imageView.image= [UIImage imageNamed:@"ss.png"];
+    //cell.textLabel.textColor=[UIColor redColor];
+    	return cell;
 }
 - (void)tableView:(UITableView *)tableView1 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
       [self loadData];
-    NSString *MainURL=@"http://itmeshop.com/truyen/truyena/";
+    NSString *MainURL=@"http://fataco.com/truyen/truyena/";
     NSString *rowValue = [allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
     NSString *FullURL = [MainURL stringByAppendingString: [arrayTitle objectAtIndex:0]];
@@ -86,7 +87,7 @@ NSArray *networkCaptions;
 }
 -(void)loadData
 {
-    NSString *MainURL=@"http://itmeshop.com/truyen/truyena/";
+    NSString *MainURL=@"http://fataco.com/truyen/truyena/";
     NSURL *URL = [NSURL URLWithString:[MainURL stringByAppendingString:@"episodes.txt" ]];
     NSError *error;
     NSString *stringFromFileAtURL = [[NSString alloc]
