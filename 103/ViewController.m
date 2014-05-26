@@ -25,7 +25,7 @@ NSArray *temp111;
 NSArray *networkCaptions;
 int countxx=0;
 
-- (NSInteger)tableView:(UITableView *)tableView1 numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	// Return the number of time zone names.
 	return [self.allLines count];
 }
@@ -60,7 +60,7 @@ int countxx=0;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //  [self loadData];
+      [self loadData2];
     NSString *MainURL=@"http://fataco.com/truyen/truyena/";
     NSString *rowValue = [self.allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
@@ -100,6 +100,15 @@ int countxx=0;
      
     [super viewDidLoad];
     temp111=self.allLines;
+    
+    //begin set image for tableview
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gtw.png"]];
+    
+    [tempImageView setFrame:self.tableView.frame];
+    
+    self.tableView.backgroundView = tempImageView;
+    [tempImageView release];
+    
     //[self loadData];
 	// Do any additional setup after loading the view, typically from a nib.
 }

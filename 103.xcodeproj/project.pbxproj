@@ -42,6 +42,7 @@
 /* Begin PBXFileReference section */
 		BF40A79F1932B5E600ED1D6D /* episode_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = episode_icon.png; path = 103/myImage/episode_icon.png; sourceTree = "<group>"; };
 		BF40A7A11932B60900ED1D6D /* gtw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gtw.png; path = 103/myImage/gtw.png; sourceTree = "<group>"; };
+		BF40A7A41932D2D500ED1D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		BF99DCCB18F942F900908E6D /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		BF99DCCC18F942F900908E6D /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		BF99DCCD18F942F900908E6D /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -328,6 +329,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BF9E27DA18F530480060A288 /* Base */,
+				BF40A7A41932D2D500ED1D6D /* en */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
