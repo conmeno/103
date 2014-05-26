@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-@property (nonatomic,retain) IBOutlet UILabel *lable1;
-@property (nonatomic,retain) IBOutlet UITableView *tableView;
-@property (nonatomic,retain) IBOutlet UITableViewCell *tablecell1;
--(IBAction)buttonclick:(id)sender;
 
+@property (nonatomic) NSArray *allLines;
 
 
 @end

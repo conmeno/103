@@ -10,37 +10,20 @@
 #import "DetailViewController.h"//;
 //#import "FGalleryViewController.h";
 @interface ViewController ()
-@property (nonatomic) NSArray *allLines;
+
 @end
 
 @implementation ViewController
-@synthesize lable1;
-@synthesize tableView;
-@synthesize tablecell1;
+
+//@synthesize tableView;
+//@synthesize tablecell1;
 
 
 //FGalleryViewController *networkGallery;
 //NSArray *networkImages;
+NSArray *temp111;
 NSArray *networkCaptions;
-
--(IBAction)buttonclick:(id)sender
-{
-    lable1.text=@"phuong nguyen";
-   
-  
-    
-    NSString *temp=@"";
-    for (int i=0; i<3;i++)
-    {
-         temp =[temp stringByAppendingString:[self.allLines objectAtIndex:i]];//[allLines objectAtIndex:2];
-    }
-    
-    lable1.text=temp;
-    DetailViewController    *detail=[[DetailViewController alloc] init];
-    
-    [self.navigationController pushViewController:detail animated:YES];
-
-}
+int countxx=0;
 
 - (NSInteger)tableView:(UITableView *)tableView1 numberOfRowsInSection:(NSInteger)section {
 	// Return the number of time zone names.
@@ -48,22 +31,36 @@ NSArray *networkCaptions;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	static NSString *MyIdentifier = @"MyIdentifier"; 	UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:MyIdentifier];
+	static NSString *MyIdentifier = @"MyIdentifier";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
 	// Set up the cell.
    //[self loadData];
+    @try {
+        // do something
+         self.allLines=temp111;
+    }
+    @catch (NSException *exception) {
+        // error happened! do something about the error state
+    }
+    @finally {
+        // do something to keep the program still running properly
+        [self loadData2];
+    }
+   
 	NSString *rowValue = [self.allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
 	cell.textLabel.text = [arrayTitle objectAtIndex:1];;
     //cell.imageView.image= [UIImage imageNamed:@"ss.png"];
     //cell.textLabel.textColor=[UIColor redColor];
+    countxx=countxx+1;
     	return cell;
 }
-- (void)tableView:(UITableView *)tableView1 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-      [self loadData];
+    //  [self loadData];
     NSString *MainURL=@"http://fataco.com/truyen/truyena/";
     NSString *rowValue = [self.allLines objectAtIndex:indexPath.row];
     NSArray *arrayTitle=[rowValue componentsSeparatedByString: @"|||"];
@@ -85,8 +82,10 @@ NSArray *networkCaptions;
     [self.navigationController pushViewController:detail animated:YES];
   
 }
--(void)loadData
+-(void)loadData2
 {
+    
+    
     NSString *MainURL=@"http://fataco.com/truyen/truyena/";
     NSURL *URL = [NSURL URLWithString:[MainURL stringByAppendingString:@"episodes.txt" ]];
     NSError *error;
@@ -100,7 +99,8 @@ NSArray *networkCaptions;
 {
      
     [super viewDidLoad];
-    [self loadData];
+    temp111=self.allLines;
+    //[self loadData];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
