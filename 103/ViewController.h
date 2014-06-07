@@ -10,7 +10,7 @@
 
 @interface ViewController : UITableViewController
 
-@property (nonatomic) NSArray *allLines;
+@property (nonatomic,retain) NSArray *allLines;
 
 
 @end
