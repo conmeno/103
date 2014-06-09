@@ -10,7 +10,10 @@
 
 @interface ViewController : UITableViewController
 
-@property (nonatomic,retain) NSArray *allLines;
+@property (nonatomic) NSArray *allLines;
+ 
+-(IBAction)infoButton:(id)sender;
+
 
 
 @end

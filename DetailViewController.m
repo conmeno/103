@@ -84,6 +84,7 @@ int temp=0;
 }
 -(void)LoadImageFromURL:(NSString *)path
 {
+    img1.image=[UIImage imageNamed:@"loading1.gif"];
     path=[path stringByReplacingOccurrencesOfString:@"\r"
                                                       withString:@""];
     NSString *temp=[MainURL stringByReplacingOccurrencesOfString:@".txt"
@@ -91,6 +92,7 @@ int temp=0;
     path=[temp stringByAppendingString:path];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]];
     img1.image=image;
+    
 }
 - (void)viewDidLoad
 {

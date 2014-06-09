@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DetailViewController.h"//;
+#import "InfoViewController.h"
 //#import "FGalleryViewController.h";
 @interface ViewController ()
 
@@ -30,7 +31,12 @@ int countxx=0;
 	return [self.allLines count];
 }
 
-
+-(IBAction)infoButton:(id)sender
+{
+    
+    InfoViewController  *detail=[[InfoViewController alloc] init];
+       [self.navigationController pushViewController:detail animated:YES];
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	static NSString *MyIdentifier = @"MyIdentifier";
@@ -102,7 +108,7 @@ int countxx=0;
     temp111=self.allLines;
     
     //begin set image for tableview
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gtw.png"]];
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gtw2.png"]];
     
     [tempImageView setFrame:self.tableView.frame];
     
